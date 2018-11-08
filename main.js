@@ -1,30 +1,43 @@
 var Game = {};
 
 Game.run = function () {
-  var WIDTH = 512;
-  var HEIGHT = 512;
+  var WIDTH = 1280;
+  var HEIGHT = 720;
 
   this._previousElapsed = 0;
 
   // setup a WebGL renderer within an existing canvas
   var canvas = document.getElementById('webglcanvas');
-  this.renderer = new THREE.WebGLRenderer({canvas: canvas});
+  this.renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true});
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
-  this.renderer.setViewport(0, 0, WIDTH, HEIGHT);
+  // this.renderer.setViewport(0, -250, WIDTH, HEIGHT);
+  this.renderer.setSize(WIDTH, HEIGHT);
+
+  // // Turn on shadows
+  // renderer.shadowMap.enabled = true;
+  // // Options are THREE.BasicShadowMap, THREE.PCFShadowMap, PCFSoftShadowMap
+  // renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   // create the scene
   this.scene = new THREE.Scene();
 
-  // create an isometric camera
-  this.camera = new THREE.OrthographicCamera(
-      -5, 5, 5, -5, -1, 100);
+  this.camera = new THREE.PerspectiveCamera(
+      70, WIDTH/HEIGHT, 1, 10000);
   this.camera.position.z = 5;
   this.camera.position.y = 5;
   this.camera.position.x = 5;
   this.camera.lookAt(this.scene.position); // point at origin
 
-  // Aquí agregar mapa
+  // create ground and axis / grid helpers
+  var ground = new THREE.Mesh(new THREE.PlaneGeometry(250, 250),
+      new THREE.MeshBasicMaterial({color: 0xcccccc}));
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -0.01; // to avoid z-fighting with axis and shadows
+  this.scene.add(ground);
+  this.scene.add((new THREE.AxesHelper(5)));
+
+  this.orbitControls = new THREE.OrbitControls(this.camera);
 
 
   // funcion para activar el debug
@@ -40,6 +53,8 @@ Game.run = function () {
   window.requestAnimationFrame(this.tick);
 }
 
+// Esta funcion la conocemos como run()
+// Usar update() para implementación
 Game.tick = function (elapsed) {
     window.requestAnimationFrame(this.tick);
 
@@ -72,6 +87,7 @@ Game.materials = {
 // Se ejecuta constantemente
 Game.update = function (delta) {// old animate funtion
   Car.update(delta);
+  this.orbitControls.update();
 }
 
 // Inicializacion inical

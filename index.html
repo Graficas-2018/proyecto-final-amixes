@@ -15,6 +15,9 @@
     <script src="../libs/tween.js/tween.js"></script>
     <script src="../libs/keyframe.js/keyframe.js"></script>
 
+    <!-- TEMPORAL -->
+    <script src="../libs/three.js/controls/OrbitControls.js"></script>
+
     <!-- <script src="../libs/three.js/loaders/GLTFLoader.js"></script> -->
     <!-- <script src="../libs/three.js/utils/cloneFBX.js"></script> -->
     <!-- Iniciar el juego y loop -->
@@ -27,6 +30,26 @@
     <script src="car.js"></script>
     <!-- <script src="map.js"></script> -->
     <!-- <script src="initial.js"></script> -->
+    <style media="screen">
+      * {
+        box-sizing: content-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        height: 100vh;
+        width: 100vw;
+      }
+      body .gameContainer {
+        position: relative;
+      }
+      body .gameContainer #container {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+      }
+    </style>
   </head>
   <body>
     <div class="gameContainer">
