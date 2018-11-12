@@ -30,7 +30,7 @@ Game.run = function () {
   this.camera.lookAt(this.scene.position); // point at origin
 
   // create ground and axis / grid helpers
-  var ground = new THREE.Mesh(new THREE.PlaneGeometry(250, 250),
+  var ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100),
       new THREE.MeshBasicMaterial({color: 0xcccccc}));
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -0.01; // to avoid z-fighting with axis and shadows
@@ -87,6 +87,7 @@ Game.materials = {
 // Se ejecuta constantemente
 Game.update = function (delta) {// old animate funtion
   Car.update(delta);
+  Interactions.update(delta);
   this.orbitControls.update();
 }
 
@@ -94,6 +95,7 @@ Game.update = function (delta) {// old animate funtion
 Game.init = function () {
   this.debug = false;
   Car.init();
+  Interactions.init();
 };
 
 window.onload = function () {
