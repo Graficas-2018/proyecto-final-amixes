@@ -93,6 +93,7 @@ Game.update = function (delta) {// old animate funtion
 // Inicializacion inical
 Game.init = function () {
   this.debug = false;
+  GameLogic.init();
   Car.init();
 };
 
