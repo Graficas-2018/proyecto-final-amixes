@@ -5,6 +5,7 @@ GameLogic = {
 
 
 GameLogic.init = function(){
+  $('#overlay').show();
   $('#message').hide();
   $('#pauseMenu').hide();
   $('#counter').show();
@@ -18,6 +19,7 @@ function _rectChangeCounter(number){
       _rectChangeCounter(--number);
     },1000);
   }else{
+    $('#overlay').hide();
     $('#counter').hide();
     $('#message').show();
     $('#messageText').text('Inicio');
