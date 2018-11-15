@@ -1,6 +1,7 @@
 START_COUNTER_TIME = 3;
 GameLogic = {
   isPlaying: false,
+  isStarted: false
 }
 
 
@@ -38,4 +39,10 @@ GameLogic.startCounter = function(number){
 
 GameLogic.startNewGame = function(){
   this.startCounter(START_COUNTER_TIME);
+}
+
+GameLogic.update = function(delta){
+  if(!GameLogic.isStarted)
+  console.log("firstUpdate");
+  GameLogic.isStarted = GameLogic.isStarted?GameLogic.isStarted:true;
 }

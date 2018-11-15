@@ -86,9 +86,11 @@ Game.materials = {
 
 // Se ejecuta constantemente
 Game.update = function (delta) {// old animate funtion
+  if(!GameLogic.isPlaying)
+  return;
+  GameLogic.update(delta);
   Car.update(delta);
   Interactions.update(delta);
-  this.orbitControls.update();
 }
 
 // Inicializacion inical
