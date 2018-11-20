@@ -32,18 +32,37 @@ function keyPressed(e)
   var key = e.key.toLowerCase();
   if (key == 'w'){
     // Move Forward
-    console.log('Move Forward');
+    console.log('Car 1 Move Forward');
   }
   else if (key == 's'){
     // Move Backwards
-    console.log('Move Backwards');
+    console.log('Car 1 Move Backwards');
   }
   else if (key == 'a'){
     // Rotate Left
-    console.log('Rotate Left');
+    console.log('Car 1 Rotate Left');
   }
   else if (key == 'd'){
     // Rotate Right
-    console.log('Rotate Right');
+    console.log('Car 1 Rotate Right');
+  }
+
+
+  var key = e.key.toLowerCase();
+  if (key == 'i'){
+    // Move Forward
+    console.log('Car 2 Move Forward');
+  }
+  else if (key == 'k'){
+    // Move Backwards
+    console.log('Car 2 Move Backwards');
+  }
+  else if (key == 'j'){
+    // Rotate Left
+    console.log('Car 2 Rotate Left');
+  }
+  else if (key == 'l'){
+    // Rotate Right
+    console.log('Car 2 Rotate Right');
   }
 }

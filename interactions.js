@@ -5,7 +5,7 @@ Interactions = {
 Interactions.init = function(){
   if(Interactions.debug)
   console.log("Debugeando");
-  // this.loadTest();
+  this.loadTest();
 }
 
 Interactions.update = function(delta){
