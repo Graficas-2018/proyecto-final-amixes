@@ -1,6 +1,8 @@
 Car = {
   car1: null,
-  car2: null
+  bumper1: null,
+  car2: null,
+  bumper2: null
 }
 
 Car.init = function(){
@@ -15,15 +17,6 @@ Car.update = function(delta){
 }
 
 Car.loadCar = function(){
-  // console.log('This update:',this.update);
-  var textureUrl = "./images/car.png";
-
-  var texture = new THREE.TextureLoader().load(textureUrl);
-  // var material = new THREE.MeshBasicMaterial({ map: texture });
-  // var geometry = new THREE.CubeGeometry(3, 3, 3);
-  // // And put the geometry and material together into a mesh
-  // this.car1 = new THREE.Mesh(geometry, material);
-
   var carMaterial = Physijs.createMaterial(
     new THREE.MeshBasicMaterial({ color: 0x1919FF }),
     .5, // Friction (0-1)
@@ -38,7 +31,26 @@ Car.loadCar = function(){
   this.car1.position.set(0, 5, 0);
   this.car1.castShadow = true;
   this.car1.receiveShadow = true;
+  this.loadBumper();
   Game.scene.add( this.car1 );
+}
+
+Car.loadBumper = function(){
+  var bumperMaterial = Physijs.createMaterial(
+    new THREE.MeshBasicMaterial({ color: 0xB20000 }),
+    .5, // Friction (0-1)
+    0 // Restitution (0-1)
+  );
+  this.bumper1 = new Physijs.BoxMesh(
+    new THREE.CylinderGeometry(1, 2, 2, 8),
+    bumperMaterial,
+    1
+  );
+  this.bumper1.__dirtyRotation = true;
+  this.bumper1.castShadow = true;
+  this.bumper1.receiveShadow = true;
+  this.car1.add( this.bumper1 );
+  this.bumper1.position.set(0.5, -0.23, 0);
 }
 
 Car.keyPressed = function(e) {
