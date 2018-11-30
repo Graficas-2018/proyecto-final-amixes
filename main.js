@@ -32,7 +32,7 @@ Game.run = function () {
 
   var ground_material = Physijs.createMaterial(
     new THREE.MeshBasicMaterial({color: 0xcccccc}),
-    0, // high friction
+    1, // high friction
     0 // low restitution
   );
 

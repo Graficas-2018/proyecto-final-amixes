@@ -25,7 +25,7 @@ Car.loadCar = function(){
 
   var carMaterial = Physijs.createMaterial(
     new THREE.MeshBasicMaterial({ color: 0x1919FF }),
-    0, // Friction (0-1)
+    .5, // Friction (0-1)
     0 // Restitution (0-1)
   );
   this.car1 = new Physijs.BoxMesh(
@@ -49,9 +49,9 @@ Car.keyPressed = function(e) {
     // Car.car1.applyCentralImpulse(Car.car1.matrix.multiplyVector3(new THREE.Vector3(5,0,0)));
     var rotationMatrix = new THREE.Matrix4();
     rotationMatrix.extractRotation(Car.car1.matrix);
-    var force_vector = new THREE.Vector3(10, 0, 0);
+    var force_vector = new THREE.Vector3(1, 0, 0);
     var final_vector = force_vector.applyMatrix4(rotationMatrix);
-    Car.car1.applyCentralForce(final_vector);
+    Car.car1.applyCentralImpulse(final_vector);
 
   }
   else if (key == 's'){
@@ -61,9 +61,9 @@ Car.keyPressed = function(e) {
     // Car.car1.applyCentralImpulse(Car.car1.matrix.multiplyVector3(new THREE.Vector3(-5,0,0)));
     var rotationMatrix = new THREE.Matrix4();
     rotationMatrix.extractRotation(Car.car1.matrix);
-    var force_vector = new THREE.Vector3(-10, 0, 0);
+    var force_vector = new THREE.Vector3(-1, 0, 0);
     var final_vector = force_vector.applyMatrix4(rotationMatrix);
-    Car.car1.applyCentralForce(final_vector);
+    Car.car1.applyCentralImpulse(final_vector);
   }
   else if (key == 'a'){
     // Rotate Left
