@@ -30,9 +30,25 @@ Game.run = function () {
   this.camera.position.x = 5;
   this.camera.lookAt(this.scene.position); // point at origin
 
+  var ground_material = Physijs.createMaterial(
+    new THREE.MeshBasicMaterial({color: 0xcccccc}),
+    0, // high friction
+    0 // low restitution
+  );
+
+  var ground_geometry = new THREE.PlaneGeometry( 100, 100 );
+  ground_geometry.computeFaceNormals();
+  ground_geometry.computeVertexNormals();
+
   // create ground and axis / grid helpers
-  var ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100),
-      new THREE.MeshBasicMaterial({color: 0xcccccc}));
+  // var ground = new Physijs.ConvexMesh(ground_geometry,
+  //                                     ground_material);
+  //
+  var ground = new Physijs.HeightfieldMesh(
+      ground_geometry,
+      ground_material,
+      0 // mass
+  );
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -0.01; // to avoid z-fighting with axis and shadows
   this.scene.add(ground);
@@ -52,7 +68,6 @@ Game.run = function () {
   // start up game
   this.init();
   window.requestAnimationFrame(this.tick);
-  this.scene.simulate();
 }
 
 // Esta funcion la conocemos como run()
@@ -66,6 +81,7 @@ Game.tick = function (elapsed) {
     this._previousElapsed = elapsed;
 
     this.update(delta);
+    this.scene.simulate();
     this.renderer.render(this.scene, this.camera);
 }.bind(Game);
 
