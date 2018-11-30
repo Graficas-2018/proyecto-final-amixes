@@ -17,6 +17,7 @@ Car.update = function(delta){
 Car.loadCar = function(){
   // console.log('This update:',this.update);
   var textureUrl = "./images/car.png";
+
   var texture = new THREE.TextureLoader().load(textureUrl);
   // var material = new THREE.MeshBasicMaterial({ map: texture });
   // var geometry = new THREE.CubeGeometry(3, 3, 3);
