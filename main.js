@@ -20,7 +20,8 @@ Game.run = function () {
   // renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   // create the scene
-  this.scene = new THREE.Scene();
+  this.scene = new Physijs.Scene();
+  this.scene.setGravity(new THREE.Vector3( 0, -20, 0 ));
 
   this.camera = new THREE.PerspectiveCamera(
       70, WIDTH/HEIGHT, 1, 10000);
@@ -51,6 +52,7 @@ Game.run = function () {
   // start up game
   this.init();
   window.requestAnimationFrame(this.tick);
+  this.scene.simulate();
 }
 
 // Esta funcion la conocemos como run()

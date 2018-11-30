@@ -1,3 +1,6 @@
+Physijs.scripts.worker = '/libs/physijs/physijs_worker.js';
+Physijs.scripts.ammo = '/libs/physijs/examples/js/ammo.js';
+
 var Utils =  {};
 
 Utils.createShadow = function (mesh, material) {
