@@ -37,6 +37,8 @@ Game.run = function () {
   this.scene.add(ground);
   this.scene.add((new THREE.AxesHelper(5)));
 
+
+
   this.orbitControls = new THREE.OrbitControls(this.camera);
 
 
