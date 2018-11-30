@@ -45,13 +45,15 @@ Car.keyPressed = function(e) {
   var key = e.key.toLowerCase();
   if (key == 'w'){
     // Move Forward
-    console.log('Car 1 Move Forward',Car.car1.matrix);
+    console.log('Car 1 Move Forward');
     // Car.car1.applyCentralImpulse({x:Car.car1.position.x+5,y:Car.car1.position.y,z:Car.car1.position.z});
     // Car.car1.applyCentralImpulse(Car.car1.matrix.multiplyVector3(new THREE.Vector3(5,0,0)));
     var rotationMatrix = new THREE.Matrix4();
     rotationMatrix.extractRotation(Car.car1.matrix);
     var force_vector = new THREE.Vector3(1, 0, 0);
     var final_vector = force_vector.applyMatrix4(rotationMatrix);
+    console.log('Final vector:', final_vector);
+    final_vector.x -= .35;
     Car.car1.applyCentralImpulse(final_vector);
 
   }
@@ -64,6 +66,7 @@ Car.keyPressed = function(e) {
     rotationMatrix.extractRotation(Car.car1.matrix);
     var force_vector = new THREE.Vector3(-1, 0, 0);
     var final_vector = force_vector.applyMatrix4(rotationMatrix);
+    final_vector.x -= .35;
     Car.car1.applyCentralImpulse(final_vector);
   }
   else if (key == 'a'){
