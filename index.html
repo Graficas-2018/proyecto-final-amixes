@@ -34,12 +34,6 @@
     <!-- <script src="map.js"></script> -->
     <!-- <script src="initial.js"></script> -->
     <style media="screen">
-      * {
-        box-sizing: content-box;
-        margin: 0;
-        padding: 0;
-      }
-
       body {
         height: 100vh;
         width: 100vw;
@@ -59,24 +53,69 @@
       <div id="container">
         <canvas id="webglcanvas"></canvas>
       </div>
-      <div id="overlay">
-
+      <div id="gameUi">
+        <div class="playerStats">
+          <div class="">
+            <h1 id="player1Label">Jugador1</h1>
+            <h2 class="livesConatiner">Vidas: <span id="player1LivesLabel"></span> </h2>
+          </div>
+          <div class="">
+            <h1 id="player2Label">Jugador2</h1>
+            <h2 class="livesConatiner">Vidas: <span id="player2LivesLabel"></span> </h2>
+          </div>
+        </div>
       </div>
+      <div id="overlay"></div>
       <div class="controls">
-        <div id="pauseMenu">
-          <h1>Menú</h1>
-          <button type="button" name="button">
-            CONTINUAR
-          </button>
-          <button type="button" name="button">
-            SALIR
-          </button>
-        </div>
-        <div id="counter">
-          <h1 id="counterNumber">5</h1>
-        </div>
-        <div id="message">
-          <h1 id="messageText">5</h1>
+        <div id="boxContainer" class="boxContainer">
+          <div id="pauseMenu">
+            <h1>Pausa</h1>
+            <button id="continueButton" type="button" name="button">
+              CONTINUAR
+            </button>
+            <button class="resetButton" type="button" name="button">
+              REINICIAR
+            </button>
+            <button class="exitButton" type="button" name="button">
+              SALIR
+            </button>
+          </div>
+
+          <div id="gameOverText">
+            <h1>GameOver</h1>
+            <p>Ganador: <span id="winnerText"></span> </p>
+            <button class="resetButton" type="button" name="button">
+              REINICIAR
+            </button>
+            <button class="exitButton" type="button" name="button">
+              SALIR
+            </button>
+          </div>
+
+          <div id="mainMenu">
+            <h1>Bienvenido</h1>
+            <p>Selecciona el nombre de tu jugador</p>
+            <div class="playerContainer">
+              <input id="player1Name"type="text" name="Player1" placeholder="Jugador1" value="">
+              <input id="player2Name"type="text" name="Player1" placeholder="Jugador2" value="">
+            </div>
+            <div class="gameTypeContainer">
+              <div class="typeButton selected" data="normal">
+                Normal
+              </div>
+              <div class="typeButton" data="vidas">
+                Vidas
+              </div>
+            </div>
+            <button id="playButton" type="button" name="button">JUGAR</button>
+            <span id="mainErrorMessage"></span>
+          </div>
+          <div id="counter">
+            <h1 id="counterNumber">5</h1>
+          </div>
+          <div id="message">
+            <h1 id="messageText"></h1>
+          </div>
         </div>
       </div>
     </div>
