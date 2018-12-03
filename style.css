@@ -1,5 +1,5 @@
 * {
-  box-sizing: content-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -16,11 +16,26 @@ body .gameContainer #container {
   width: 100%;
   position: absolute;
 }
+body .gameContainer #gameUi {
+  position: absolute;
+  z-index: 500;
+  height: 100vh;
+  width: 100vw;
+}
+body .gameContainer #gameUi .playerStats {
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1em;
+}
 body .gameContainer #overlay {
   height: 100vh;
   width: 100vw;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   pointer-events: none;
 }
 body .gameContainer .controls {
@@ -33,14 +48,35 @@ body .gameContainer .controls {
   justify-content: center;
   align-items: center;
 }
+body .gameContainer .controls .boxContainer {
+  background-color: white;
+  border-radius: 25px;
+  padding: 1em;
+}
 body .gameContainer .controls button {
   width: 10%;
   height: 2em;
 }
-body .gameContainer .controls #counter {
-  padding: 2em;
-  background-color: white;
-  border-radius: 5px;
+body .gameContainer .controls #mainMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body .gameContainer .controls #mainMenu .gameTypeContainer {
+  display: flex;
+}
+body .gameContainer .controls #mainMenu .gameTypeContainer .typeButton {
+  border: 1px solid transparent;
+}
+body .gameContainer .controls #mainMenu .gameTypeContainer .typeButton.selected {
+  border-color: black;
+}
+body .gameContainer .controls #message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /*# sourceMappingURL=style.css.map */

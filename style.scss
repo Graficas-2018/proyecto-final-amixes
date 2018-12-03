@@ -1,5 +1,5 @@
 *{
-  box-sizing: content-box;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
@@ -16,11 +16,26 @@ body{
 
       }
     }
+    #gameUi{
+      position: absolute;
+      z-index: 500;
+      height: 100vh;
+      width: 100vw;
+      .playerStats{
+        background-color: rgba(255,255,255,0.5);
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 1em;
+      }
+    }
     #overlay{
       height: 100vh;
       width: 100vw;
       position: absolute;
-      background-color: rgba(0,0,0,0.5);
+      background-color: rgba(255,255,255,0.5);
       pointer-events: none;
     }
     .controls{
@@ -32,14 +47,39 @@ body{
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      .boxContainer{
+        background-color: white;
+        border-radius: 25px;
+        padding: 1em;
+
+      }
       button{
         width: 10%;
         height: 2em;
       }
       #counter{
-        padding: 2em;
-        background-color: white;
-        border-radius: 5px;
+      }
+      #mainMenu{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .gameTypeContainer{
+          display: flex;
+          .typeButton{
+            border: 1px solid transparent;
+            &.selected{
+              border-color: black;
+
+            }
+          }
+        }
+      }
+      #message{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
     }
   }

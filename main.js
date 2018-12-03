@@ -1,4 +1,6 @@
-var Game = {};
+var Game = {
+  debug: false,
+};
 
 Game.run = function () {
   var WIDTH = 1280;
@@ -25,9 +27,9 @@ Game.run = function () {
 
   this.camera = new THREE.PerspectiveCamera(
       70, WIDTH/HEIGHT, 1, 10000);
-  this.camera.position.z = 5;
-  this.camera.position.y = 5;
-  this.camera.position.x = 5;
+  this.camera.position.z = 20;
+  this.camera.position.y = 35;
+  // this.camera.position.x = 5;
   this.camera.lookAt(this.scene.position); // point at origin
 
   var ground_material = Physijs.createMaterial(
@@ -36,7 +38,7 @@ Game.run = function () {
     0 // low restitution
   );
 
-  var ground_geometry = new THREE.PlaneGeometry( 100, 100 );
+  var ground_geometry = new THREE.PlaneGeometry( 60, 60 );
   ground_geometry.computeFaceNormals();
   ground_geometry.computeVertexNormals();
 
@@ -54,16 +56,17 @@ Game.run = function () {
   this.scene.add(ground);
   this.scene.add((new THREE.AxesHelper(5)));
 
+  if(this.debug)
   this.orbitControls = new THREE.OrbitControls(this.camera);
 
 
   // funcion para activar el debug
-  document.addEventListener('keyup', function (event) {
+  document.addEventListener('keyup', (event)=>{
       if (event.keyCode === 27) { // listen for Esc Key
           event.preventDefault();
-          this.toggleDebug();
+          this.debug = !this.debug;
       }
-  }.bind(this));
+  });
 
   // start up game
   this.init();
@@ -73,6 +76,7 @@ Game.run = function () {
 // Esta funcion la conocemos como run()
 // Usar update() para implementación
 Game.tick = function (elapsed) {
+  // console.log("this tik",this);
     window.requestAnimationFrame(this.tick);
 
     // compute delta time in seconds -- also cap it
@@ -80,10 +84,12 @@ Game.tick = function (elapsed) {
     delta = Math.min(delta, 0.25); // maximum delta of 250 ms
     this._previousElapsed = elapsed;
 
-    this.update(delta);
-    this.scene.simulate();
-    this.renderer.render(this.scene, this.camera);
-}.bind(Game);
+    if(GameLogic.isStarted || this.debug){
+      this.update(delta);
+      this.scene.simulate();
+      this.renderer.render(this.scene, this.camera);
+    }
+}.bind(Game); // need binding because is passed to "requestAnimationFrame" function
 
 Game.materials = {
     shadow: new THREE.MeshBasicMaterial({
@@ -113,7 +119,6 @@ Game.update = function (delta) {// old animate funtion
 
 // Inicializacion inical
 Game.init = function () {
-  this.debug = false;
   GameLogic.init();
   Car.init();
   Interactions.init();
