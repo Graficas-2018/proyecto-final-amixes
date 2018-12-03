@@ -29,9 +29,40 @@ Game.run = function () {
   this.camera.position.y = 5;
   this.camera.position.x = 5;
   this.camera.lookAt(this.scene.position); // point at origin
+  var bgUrl = "./images/milkyway.png";
+  var backgroundImg = new THREE.TextureLoader().load(bgUrl);
+  backgroundImg.wrapS = backgroundImg.wrapT = THREE.RepeatWrapping;
+  backgroundImg.repeat.set(1, 1);
+  this.scene.background = backgroundImg;
+  var ambientLight = null;
+  var spotLight = null;
+  var directionalLight = null;
+  // Add a directional light to show off the object
+    directionalLight = new THREE.DirectionalLight( 0xffffff, 1);
 
+    // Create and add all the lights
+    directionalLight.position.set(.5, 0, 3);
+    this.camera.add(directionalLight);
+
+    pointLight = new THREE.PointLight (0x0000ff, 1, 20);
+    pointLight.position.set(-5, 2, -10);
+    this.camera.add(pointLight);
+
+    spotLight = new THREE.SpotLight (0x00ff00);
+    spotLight.position.set(2, 2, 5);
+    spotLight.target.position.set(2, 0, 4);
+    this.camera.add(spotLight);
+
+    ambientLight = new THREE.AmbientLight ( 0x888888 );
+    this.camera.add(ambientLight);
+
+    //spotLight.shadow.mapSize.width = SHADOW_MAP_WIDTH;
+    //spotLight.shadow.mapSize.height = SHADOW_MAP_HEIGHT;
+  //this.camera.add(spotLight);
+  var groundTextureUrl = "/images/platform.png";
+  var map = new THREE.TextureLoader().load(groundTextureUrl);
   var ground_material = Physijs.createMaterial(
-    new THREE.MeshBasicMaterial({color: 0xcccccc}),
+    new THREE.MeshBasicMaterial({color: 0xcccccc, map:map}),
     1, // high friction
     0 // low restitution
   );
