@@ -101,7 +101,7 @@ GameLogic.startNewGame = function(){
   $('#gameUi').show();
   this.startCounter(START_COUNTER_TIME);
   $(document).keypress(event=>{
-    console.log("keypress",event);
+    // console.log("keypress",event);
     let key = event.originalEvent.key;
     if(key =='p'|| key =='P')
     this.openPause();
@@ -109,8 +109,8 @@ GameLogic.startNewGame = function(){
 }
 
 GameLogic.updateLives = function(){
-  $('#player1Lives').text(this.player1Lives);
-  $('#player2Lives').text(this.player2Lives);
+  $('#player1LivesLabel').text(this.player1Lives);
+  $('#player2LivesLabel').text(this.player2Lives);
   if(this.player1Lives == 0)
     return this.gameOver(this.player2Name);
   if(this.player2Lives == 0)
@@ -132,6 +132,7 @@ GameLogic.gameOver = function(winner){
   this.isStarted = false;
   this.isPlaying = false;
   this.showBox('#gameOverText');
+  $('#winnerText').text(winner);
 }
 
 GameLogic.restartGame = function(){

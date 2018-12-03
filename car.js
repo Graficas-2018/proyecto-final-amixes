@@ -10,10 +10,37 @@ Car.init = function(){
   console.log("Debugeando");
 
   this.loadCar();
+  document.addEventListener("keypress", this.keyPressed, false);
 }
 
 Car.update = function(delta){
-  document.addEventListener("keypress", this.keyPressed, false);
+  // console.log("car1, car2",this.car1.position.y,this.car2.position.y);
+  if(this.car1.position.y < -100){
+    // console.log("car1 fall");
+    GameLogic.player1Lives-=1;
+    GameLogic.updateLives();
+    this.resetCar(this.car1);
+  }
+  if(this.car2.position.y < -100){
+    // console.log("car2 fall");
+    GameLogic.player2Lives-=1;
+    GameLogic.updateLives();
+    this.resetCar(this.car2);
+  }
+
+}
+
+Car.resetCar = function(car){
+  // console.log("resetCar",car);
+  // debugger;
+  car.position.set(0, 5, 0);
+  car.__dirtyPosition = true;
+  car.rotation.set(0,0, 0);
+  car.__dirtyRotation = true;
+
+  car.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+  car.setAngularVelocity(new THREE.Vector3(0, 0, 0));
+  // debugger;
 }
 
 Car.loadCar = function(){
@@ -32,7 +59,7 @@ Car.loadCar = function(){
     1
   );
   this.car1.__dirtyRotation = true;
-  this.car1.position.set(-5, 5, 0);
+  this.car1.position.set(-5, 2.5, 0);
   this.car1.castShadow = true;
   this.car1.receiveShadow = true;
   Game.scene.add( this.car1 );
@@ -50,7 +77,7 @@ Car.loadCar = function(){
     1
   );
   this.car2.__dirtyRotation = true;
-  this.car2.position.set(5, 5, 0);
+  this.car2.position.set(5, 2.5, 0);
   this.car2.castShadow = true;
   this.car2.receiveShadow = true;
   Game.scene.add( this.car2 );
@@ -90,24 +117,27 @@ Car.loadBumpers = function(){
 }
 
 Car.keyPressed = function(e) {
+  if(!GameLogic.isStarted)
+  return;
+  // console.log("keyPressed",e);
   var key = e.key.toLowerCase();
   if (key == 'w'){
     // Move Forward
-    console.log('Car 1 Move Forward');
+    // console.log('Car 1 Move Forward');
     // Car.car1.applyCentralImpulse({x:Car.car1.position.x+5,y:Car.car1.position.y,z:Car.car1.position.z});
     // Car.car1.applyCentralImpulse(Car.car1.matrix.multiplyVector3(new THREE.Vector3(5,0,0)));
     var rotationMatrix = new THREE.Matrix4();
     rotationMatrix.extractRotation(Car.car1.matrix);
     var force_vector = new THREE.Vector3(10, 0, 0);
     var final_vector = force_vector.applyMatrix4(rotationMatrix);
-    console.log('Final vector:', final_vector);
+    // console.log('Final vector:', final_vector);
     final_vector.x -= .35;
     Car.car1.applyCentralImpulse(final_vector);
 
   }
   else if (key == 's'){
     // Move BackwardsmultiplyVector3
-    console.log('Car 1 Move Backwards');
+    // console.log('Car 1 Move Backwards');
     // Car.car1.applyCentralImpulse({x:Car.car1.position.x,y:Car.car1.position.y,z:Car.car1.position.z-5});
     // Car.car1.applyCentralImpulse(Car.car1.matrix.multiplyVector3(new THREE.Vector3(-5,0,0)));
     var rotationMatrix = new THREE.Matrix4();
@@ -119,33 +149,33 @@ Car.keyPressed = function(e) {
   }
   else if (key == 'a'){
     // Rotate Left
-    console.log('this 1 Rotate Left');
+    // console.log('this 1 Rotate Left');
     Car.car1.rotateY(.1);
     Car.car1.__dirtyRotation = true;
-    console.log(Car.car1.rotation);
+    // console.log(Car.car1.rotation);
   }
   else if (key == 'd'){
     // Rotate Right
-    console.log('Car 1 Rotate Right');
+    // console.log('Car 1 Rotate Right');
     Car.car1.rotateY(-.1);
     Car.car1.__dirtyRotation = true;
-    console.log(Car.car1.rotation);
+    // console.log(Car.car1.rotation);
   }
 
   if (key == 'i'){
     // Move Forward
-    console.log('Car 2 Move Forward');
+    // console.log('Car 2 Move Forward');
     var rotationMatrix = new THREE.Matrix4();
     rotationMatrix.extractRotation(Car.car2.matrix);
     var force_vector = new THREE.Vector3(10, 0, 0);
     var final_vector = force_vector.applyMatrix4(rotationMatrix);
-    console.log('Final vector:', final_vector);
+    // console.log('Final vector:', final_vector);
     final_vector.x -= .35;
     Car.car2.applyCentralImpulse(final_vector);
   }
   else if (key == 'k'){
     // Move Backwards
-    console.log('Car 2 Move Backwards');
+    // console.log('Car 2 Move Backwards');
     var rotationMatrix = new THREE.Matrix4();
     rotationMatrix.extractRotation(Car.car2.matrix);
     var force_vector = new THREE.Vector3(-10, 0, 0);
@@ -155,16 +185,16 @@ Car.keyPressed = function(e) {
   }
   else if (key == 'j'){
     // Rotate Left
-    console.log('Car 2 Rotate Left');
+    // console.log('Car 2 Rotate Left');
     Car.car2.rotateY(.1);
     Car.car2.__dirtyRotation = true;
-    console.log(Car.car2.rotation);
+    // console.log(Car.car2.rotation);
   }
   else if (key == 'l'){
     // Rotate Right
-    console.log('Car 2 Rotate Right');
+    // console.log('Car 2 Rotate Right');
     Car.car2.rotateY(-.1);
     Car.car2.__dirtyRotation = true;
-    console.log(Car.car2.rotation);
+    // console.log(Car.car2.rotation);
   }
 }
