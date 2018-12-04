@@ -55,7 +55,7 @@ Car.loadCar = function(){
   var blueCarMaterial = Physijs.createMaterial(
     new THREE.MeshBasicMaterial({ color:0xffffff, map:map }),
     .5, // Friction (0-1)
-    0 // Restitution (0-1)
+    0.8 // Restitution (0-1)
   );
   this.car1 = new Physijs.BoxMesh(
     new THREE.CylinderGeometry(1, 2.5, 2.5, 8),
@@ -79,7 +79,7 @@ Car.loadCar = function(){
   var purpleCarMaterial = Physijs.createMaterial(
     new THREE.MeshBasicMaterial({ color:0xffffff, map:map }),
     .5, // Friction (0-1)
-    0 // Restitution (0-1)
+    0.8 // Restitution (0-1)
   );
   this.car2 = new Physijs.BoxMesh(
     new THREE.CylinderGeometry(1, 2.5, 2.5, 8),
@@ -114,7 +114,8 @@ Car.loadBumpers = function(){
   this.bumper1 = new Physijs.BoxMesh(
     new THREE.CylinderGeometry(1, 2, 2, 8),
     bumperMaterial,
-    1
+    1,
+    0.8
   );
   this.bumper1.__dirtyRotation = true;
   this.bumper1.castShadow = true;
@@ -125,7 +126,8 @@ Car.loadBumpers = function(){
   this.bumper2 = new Physijs.BoxMesh(
     new THREE.CylinderGeometry(1, 2, 2, 8),
     bumperMaterial,
-    1
+    1,
+    0.8
   );
   this.bumper2.__dirtyRotation = true;
   this.bumper2.castShadow = true;
