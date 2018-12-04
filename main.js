@@ -1,5 +1,5 @@
 var Game = {
-  debug: false,
+  debug: true,
 };
 
 Game.run = function () {
@@ -153,6 +153,7 @@ Game.init = function () {
   GameLogic.init();
   Car.init();
   Interactions.init();
+  Lives.init();
 };
 
 window.onload = function () {
