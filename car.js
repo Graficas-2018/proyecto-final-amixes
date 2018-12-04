@@ -1,7 +1,9 @@
 Car = {
   car1: null,
+  car1BBox: null,
   bumper1: null,
   car2: null,
+  car2BBox: null,
   bumper2: null
 }
 
@@ -14,6 +16,8 @@ Car.init = function(){
 }
 
 Car.update = function(delta){
+  this.car1BBox.update();
+  this.car2BBox.update();
   // console.log("car1, car2",this.car1.position.y,this.car2.position.y);
   if(this.car1.position.y < -100){
     // console.log("car1 fall");
@@ -62,7 +66,13 @@ Car.loadCar = function(){
   this.car1.position.set(-5, 2.5, 0);
   this.car1.castShadow = true;
   this.car1.receiveShadow = true;
+
+  this.car1BBox = new THREE.BoxHelper(this.car1, 0x00ff00);
+  this.car1BBox.update();
+  this.car1BBox.visible = false;
+
   Game.scene.add( this.car1 );
+  Game.scene.add( this.car1BBox );
 
   var purpleTextureURL = "/images/purple_texture.png";
   map = new THREE.TextureLoader().load(purpleTextureURL);
@@ -76,11 +86,19 @@ Car.loadCar = function(){
     purpleCarMaterial,
     1
   );
+  this.car2.rotation.y = Math.PI;
   this.car2.__dirtyRotation = true;
   this.car2.position.set(5, 2.5, 0);
+
   this.car2.castShadow = true;
   this.car2.receiveShadow = true;
+
+  this.car2BBox = new THREE.BoxHelper(this.car2, 0x00ff00);
+  this.car2BBox.update();
+  this.car2BBox.visible = false;
+
   Game.scene.add( this.car2 );
+  Game.scene.add( this.car2BBox );
 
   this.loadBumpers();
 }
@@ -117,7 +135,7 @@ Car.loadBumpers = function(){
 }
 
 Car.keyPressed = function(e) {
-  if(!GameLogic.isStarted)
+  if(!GameLogic.isStarted || !GameLogic.isPlaying)
   return;
   // console.log("keyPressed",e);
   var key = e.key.toLowerCase();
@@ -150,14 +168,14 @@ Car.keyPressed = function(e) {
   else if (key == 'a'){
     // Rotate Left
     // console.log('this 1 Rotate Left');
-    Car.car1.rotateY(.1);
+    Car.car1.rotateY(Math.PI/10);
     Car.car1.__dirtyRotation = true;
     // console.log(Car.car1.rotation);
   }
   else if (key == 'd'){
     // Rotate Right
     // console.log('Car 1 Rotate Right');
-    Car.car1.rotateY(-.1);
+    Car.car1.rotateY(-Math.PI/10);
     Car.car1.__dirtyRotation = true;
     // console.log(Car.car1.rotation);
   }

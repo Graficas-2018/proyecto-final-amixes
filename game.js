@@ -70,6 +70,7 @@ GameLogic._rectChangeCounter =  function (number){
   }else{
     this.hideBox();
     this.showMessage('Inicio!', true);
+    this.isPlaying = true;
   }
 }
 
@@ -88,6 +89,7 @@ GameLogic.startNewGame = function(){
     this.player2Lives = 3;
     $('.livesConatiner').show();
   }else{
+    Lives.hideHeart();
     this.player1Lives = 1;
     this.player2Lives = 1;
     $('.livesConatiner').hide();

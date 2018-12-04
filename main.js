@@ -1,5 +1,5 @@
 var Game = {
-  debug: true,
+  debug: false,
 };
 
 Game.run = function () {
@@ -85,6 +85,7 @@ Game.run = function () {
   ground.rotation.x = -Math.PI / 2;
   ground.position.y = -0.01; // to avoid z-fighting with axis and shadows
   this.scene.add(ground);
+  if(this.debug)
   this.scene.add((new THREE.AxesHelper(5)));
 
   if(this.debug)
@@ -146,6 +147,7 @@ Game.update = function (delta) {// old animate funtion
   GameLogic.update(delta);
   Car.update(delta);
   Interactions.update(delta);
+  Lives.update(delta);
 }
 
 // Inicializacion inical

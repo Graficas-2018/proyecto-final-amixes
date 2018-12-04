@@ -37,6 +37,14 @@ body .gameContainer #overlay {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.5);
   pointer-events: none;
+  background: #b5bdc8;
+  /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, rgba(181, 189, 200, 0.8) 0%, rgba(130, 140, 149, 0.8) 36%, rgba(40, 52, 59, 0.8) 100%);
+  /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(181, 189, 200, 0.8) 0%, rgba(130, 140, 149, 0.8) 36%, rgba(40, 52, 59, 0.8) 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, rgba(181, 189, 200, 0.8) 0%, rgba(130, 140, 149, 0.8) 36%, rgba(40, 52, 59, 0.8) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 body .gameContainer .controls {
   position: absolute;
@@ -52,25 +60,60 @@ body .gameContainer .controls .boxContainer {
   background-color: white;
   border-radius: 25px;
   padding: 1em;
+  background: #f6f8f9;
+  /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #f6f8f9 0%, #e5ebee 37%, #d7dee3 59%, #f5f7f9 100%);
+  /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, #f6f8f9 0%, #e5ebee 37%, #d7dee3 59%, #f5f7f9 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, #f6f8f9 0%, #e5ebee 37%, #d7dee3 59%, #f5f7f9 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#f6f8f9", endColorstr="#f5f7f9",GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */
 }
 body .gameContainer .controls button {
-  width: 10%;
-  height: 2em;
+  height: 2.5em;
+  cursor: pointer;
 }
 body .gameContainer .controls #mainMenu {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  min-height: 40vh;
 }
 body .gameContainer .controls #mainMenu .gameTypeContainer {
   display: flex;
 }
 body .gameContainer .controls #mainMenu .gameTypeContainer .typeButton {
   border: 1px solid transparent;
+  border-radius: 15px;
+  padding: 0.5em;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a7cfdf+0,23538a+100;Blue+3d+%238 */
+  background: #a7cfdf;
+  /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #a7cfdf 0%, #23538a 100%);
+  /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, #a7cfdf 0%, #23538a 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, #a7cfdf 0%, #23538a 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#a7cfdf", endColorstr="#23538a",GradientType=1 );
+  /* IE6-9 fallback on horizontal gradient */
+  cursor: pointer;
+}
+body .gameContainer .controls #mainMenu .gameTypeContainer .typeButton:first-child {
+  margin-right: 1em;
 }
 body .gameContainer .controls #mainMenu .gameTypeContainer .typeButton.selected {
+  border-color: gray;
+  box-shadow: 2px 2px 10px -5px black;
+}
+body .gameContainer .controls #mainMenu .gameTypeContainer .typeButton:hover {
   border-color: black;
+}
+body .gameContainer .controls #mainMenu button#playButton {
+  width: 100%;
 }
 body .gameContainer .controls #message {
   display: flex;
